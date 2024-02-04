@@ -11,10 +11,32 @@ document.addEventListener('DOMContentLoaded', function() {
             if (links[i].style.display === 'block') {
                 links[i].style.display = 'none';
             } else {
-                links[i].style.display = 'block';
+                links[i].style.display = 'block';   
             }
         }
+    }; 
+    navbar.insertBefore(toggleButton, navbar.firstChild);
+    window.onresize = function() {
+        if (window.innerWidth > 600) {
+            var links = navbar.querySelectorAll('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].style.display = 'block';
+            }
+            toggleButton.style.display = 'none';
+        } else {
+            toggleButton.style.display = 'block';
+        }
     };
+    window.onresize(); // Call once to set initial state
+
+    var themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', function() {
+        var link = document.querySelector('link[title="main"]');
+        var currentTheme = link.getAttribute('href');
+        link.setAttribute('href', currentTheme === 'style.css' ? 'sky-theme.css' : 'style.css');
+    });
+});
+
 // http://people.tamu.edu/~akshay123456789/
 
 //This is link to my landing page.
@@ -31,17 +53,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    navbar.insertBefore(toggleButton, navbar.firstChild);
-    window.onresize = function() {
-        if (window.innerWidth > 600) {
-            var links = navbar.querySelectorAll('a');
-            for (var i = 0; i < links.length; i++) {
-                links[i].style.display = 'block';
-            }
-            toggleButton.style.display = 'none';
-        } else {
-            toggleButton.style.display = 'block';
-        }
-    };
-    window.onresize(); // Call once to set initial state
-});
