@@ -14,8 +14,8 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - aws s3 sync dist/ s3://csce412adham.xyz --delete
+      - aws s3 sync . s3://csce412adham.xyz --delete --exclude "buildspec.yml" --exclude "package.json"
 artifacts:
   files:
     - '**/*'
-  base-directory: dist
+  base-directory: .
